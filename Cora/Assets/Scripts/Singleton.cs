@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections;
 
+//https://gist.github.com/mstevenson/4325117
 public class Singleton<T> : MonoBehaviour
 	where T : Component
 {

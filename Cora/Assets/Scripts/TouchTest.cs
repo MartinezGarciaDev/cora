@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class TouchTest : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject managerObject;
     private InputManager inputManager;
     private Camera cameraMain;
 
     private void Awake()
     {
-        inputManager = InputManager.Instance;
+        inputManager = managerObject.GetComponent(typeof(InputManager)) as InputManager;
         cameraMain = Camera.main;
     }
 

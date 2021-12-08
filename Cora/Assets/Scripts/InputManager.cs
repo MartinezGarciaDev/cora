@@ -41,6 +41,11 @@ public class InputManager : Singleton<InputManager>
     private void EndTouch(InputAction.CallbackContext context)
     {
         Debug.Log("Touch end position = " + touchControls.Touch.TouchPosition.ReadValue<Vector2>());
-        if (OnStartTouch != null) OnEndTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
+        if (OnEndTouch != null) OnEndTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
+    }
+
+    private void TouchPress(InputAction.CallbackContext context)
+    {
+        //touchControls.Touch.TouchPress.IsPressed;
     }
 }
