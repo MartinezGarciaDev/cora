@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -115,10 +115,12 @@ public class CoraManager : MonoBehaviour
         currentHeart.SetActive(true);
 
         Debug.Log("fullHeart");
+        //♥
     }
 
     public void LastHeart()
     {
         Debug.Log("lastHeart, unsolvable");
+        //💔
     }
 }

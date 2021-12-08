@@ -26,7 +26,10 @@ public class TouchTest : MonoBehaviour
     {
         // Use this to Move dropped fragments to focus plane
         // Check this when the movement happens
-        Vector3 screenCoordinates = new Vector3(screenPosition.x, screenPosition.y, cameraMain.nearClipPlane);
+        //Vector3 screenCoordinates = new Vector3(screenPosition.x, screenPosition.y, cameraMain.nearClipPlane);
+
+        //Z distance = camera <-> heart
+        Vector3 screenCoordinates = new Vector3(screenPosition.x, screenPosition.y, 3.74f - 1.45f);
         Vector3 worldCoordinates = cameraMain.ScreenToWorldPoint(screenCoordinates);
         worldCoordinates.z = 0;
         

@@ -863,7 +863,6 @@ GameObject:
   m_Component:
   - component: {fileID: 611830819}
   - component: {fileID: 611830820}
-  - component: {fileID: 611830821}
   m_Layer: 0
   m_Name: cora
   m_TagString: Untagged
@@ -905,20 +904,6 @@ MonoBehaviour:
   - {fileID: 664662565}
   - {fileID: 1216916996}
   currentHeart: {fileID: 0}
-  brokenHeartsIndex: 1
---- !u!114 &611830821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611830818}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d87e0a90879944d883342e6ec0b307, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  managerObject: {fileID: 330714357}
 --- !u!1 &664662565
 GameObject:
   m_ObjectHideFlags: 0
