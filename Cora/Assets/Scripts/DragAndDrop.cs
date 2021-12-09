@@ -11,6 +11,8 @@ public class DragAndDrop : MonoBehaviour
     private float mouseDragPhysicsSpeed = 10;
     [SerializeField]
     private float mouseDragSpeed = .1f;
+    [SerializeField]
+    private float focusDistance = 2.29f;
 
     private Camera mainCamera;
     private Vector3 velocity = Vector3.zero;
@@ -59,13 +61,13 @@ public class DragAndDrop : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (rb != null)
             {
-                Vector3 direction = ray.GetPoint(initialDistance) - clickedObject.transform.position;
+                Vector3 direction = ray.GetPoint(focusDistance) - clickedObject.transform.position;
                 rb.velocity = direction * mouseDragPhysicsSpeed;
                 yield return waitForFixedUpdate;
             }
             else
             {
-                clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, ray.GetPoint(initialDistance), ref velocity, mouseDragSpeed);
+                clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, ray.GetPoint(focusDistance), ref velocity, mouseDragSpeed);
                 yield return null;
             }
         }

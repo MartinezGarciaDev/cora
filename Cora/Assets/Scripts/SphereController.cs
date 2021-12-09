@@ -13,6 +13,7 @@ public class SphereController : MonoBehaviour, IDrag
     public void onStartDrag()
     {
         rb.useGravity = false;
+        //Freeze x and z rotation axis. Reset x z rotation to origin? Make the object parallel to camera plane
     }
     public void onEndDrag()
     {
