@@ -21,6 +21,8 @@ public class CoraManager : MonoBehaviour
     private int brokenHeartsTotal;
     private int solvedHearts = 0;
 
+    private bool standby = true;
+
 
     private void Awake()
     {
@@ -29,89 +31,93 @@ public class CoraManager : MonoBehaviour
         cameraMain = Camera.main;
         currentHeart = fullHeart;
 
+        standby = true;
+
         brokenHeartsTotal = brokenHearts.Length;
     }
 
-
     void Update()
     {
-        
         //Full heart, wait and change
-        if (currentHeart == fullHeart)
+        if ((currentHeart == fullHeart) && (standby == true))
         {
+            standby = false;
             StartCoroutine(WaitCoroutineBreak(2f));
-            //BreakHeart();
         }
 
         //Restore heart and swap the next broken heart
-        if ((currentHeart != fullHeart) && (brokenHeartsIndex < brokenHeartsTotal))
+        else if ((currentHeart != fullHeart) && (brokenHeartsIndex < brokenHeartsTotal))
         {
-            if (currentHeart.GetComponent<BrokenManager>().CurrentState == 1)
-            RestoreHeart();
+            //check if broken heart is solved
+            if ((currentHeart.GetComponent<BrokenManager>().CurrentState == 1) && (standby == false))
+            {
+                standby = true;
+                RestoreHeart();
+            }    
         }
 
- /*       else if ((currentHeart != fullHeart) && (brokenHeartsIndex == brokenHeartsTotal))
+        else if ((currentHeart != fullHeart) && (brokenHeartsIndex == brokenHeartsTotal))
         {
             LastHeart();
+        }
+    }
+
+    /*    private void OnEnable()
+        {
+            inputManager.OnStartTouch += Move;
+        }
+        private void OnDisable()
+        {
+            inputManager.OnEndTouch -= Move;
+        }
+    */
+    /*    private void Change(Vector2 screenPosition, float time)
+        {
+            //if (fullHeart.activeSelf == true)
+            if (currentHeart != fullHeart)
+            {
+                currentHeart.SetActive(false);
+                fullHeart.SetActive(true);
+
+                //nextheart
+                Debug.Log("brokenHeart");
+            }
+
+            if (currentHeart == fullHeart)
+            {
+                fullHeart.SetActive(false);
+                brokenHearts[0].SetActive(true);
+                currentHeart = brokenHearts[0];
+
+                Debug.Log("fullHeart");
+            }
         }*/
-    }
 
-/*    private void OnEnable()
-    {
-        inputManager.OnStartTouch += Move;
-    }
-    private void OnDisable()
-    {
-        inputManager.OnEndTouch -= Move;
-    }
-*/
-/*    private void Change(Vector2 screenPosition, float time)
-    {
-        //if (fullHeart.activeSelf == true)
-        if (currentHeart != fullHeart)
+    /*    public void Move(Vector2 screenPosition, float time)
         {
-            currentHeart.SetActive(false);
-            fullHeart.SetActive(true);
-
-            //nextheart
-            Debug.Log("brokenHeart");
-        }
-
-        if (currentHeart == fullHeart)
-        {
-            fullHeart.SetActive(false);
-            brokenHearts[0].SetActive(true);
-            currentHeart = brokenHearts[0];
-
-            Debug.Log("fullHeart");
-        }
-    }*/
-
-/*    public void Move(Vector2 screenPosition, float time)
-    {
-        // Use this to Move dropped fragments to focus plane
-        // Check this when the movement happens
-        Vector3 screenCoordinates = new Vector3(screenPosition.x, screenPosition.y, cameraMain.nearClipPlane);
-        Vector3 worldCoordinates = cameraMain.ScreenToWorldPoint(screenCoordinates);
-        worldCoordinates.z = 0;
+            // Use this to Move dropped fragments to focus plane
+            // Check this when the movement happens
+            Vector3 screenCoordinates = new Vector3(screenPosition.x, screenPosition.y, cameraMain.nearClipPlane);
+            Vector3 worldCoordinates = cameraMain.ScreenToWorldPoint(screenCoordinates);
+            worldCoordinates.z = 0;
 
 
-        if (currentHeart == fullHeart)
-        {
-            BreakHeart();
-        }
+            if (currentHeart == fullHeart)
+            {
+                BreakHeart();
+            }
 
-        else if ((currentHeart != fullHeart) && (brokenHeartsIndex < brokenHearts.Length))
-        {
-            RestoreHeart();
-        }
+            else if ((currentHeart != fullHeart) && (brokenHeartsIndex < brokenHearts.Length))
+            {
+                RestoreHeart();
+            }
 
-        else if ((currentHeart != fullHeart) && (brokenHeartsIndex == brokenHearts.Length))
-        {
-            LastHeart();
-        }
-        //transform.position = worldCoordinates;
-    }*/
+            else if ((currentHeart != fullHeart) && (brokenHeartsIndex == brokenHearts.Length))
+            {
+                LastHeart();
+            }
+            //transform.position = worldCoordinates;
+        }*/
 
     public void BreakHeart()
     {
@@ -121,8 +127,7 @@ public class CoraManager : MonoBehaviour
 
         Debug.Log("brokenHeart index is " + brokenHeartsIndex);
 
-        //Something is WRONG here
-        //brokenHeartsIndex++;
+        brokenHeartsIndex++;
     }
 
     public void RestoreHeart()
@@ -136,18 +141,18 @@ public class CoraManager : MonoBehaviour
 
     public void LastHeart()
     {
-        Debug.Log("lastHeart, unsolvable");
+        Debug.Log("lastHeart, unsolvable :(");
     }
 
     IEnumerator WaitCoroutineBreak(float seconds)
     {
         //Print the time of when the function is first called.
-        //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(seconds);
         BreakHeart();
         //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        Debug.Log("Finished BreakCoroutine at timestamp : " + Time.time);
     }
 }

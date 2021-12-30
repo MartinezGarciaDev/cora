@@ -1848,7 +1848,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1050392705}
   - component: {fileID: 1050392704}
-  - component: {fileID: 1050392703}
   m_Layer: 0
   m_Name: cora (1)
   m_TagString: Untagged
@@ -1856,19 +1855,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1050392703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050392702}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d87e0a90879944d883342e6ec0b307, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  managerObject: {fileID: 330714357}
 --- !u!114 &1050392704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2954,6 +2940,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1442368867}
     m_Modifications:
+    - target: {fileID: 5033072829718862097, guid: ed86671980d4c62408b25271ca0cecae,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033072829718862098, guid: ed86671980d4c62408b25271ca0cecae,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5033072829718862316, guid: ed86671980d4c62408b25271ca0cecae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2968,6 +2964,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cora_broken_models_1_pieces_piece_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033072829718862317, guid: ed86671980d4c62408b25271ca0cecae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033072829718862317, guid: ed86671980d4c62408b25271ca0cecae,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5033072829808591786, guid: ed86671980d4c62408b25271ca0cecae,
         type: 3}
