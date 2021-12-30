@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class PieceBehaviour : MonoBehaviour, IDrag
 {
+    [SerializeField]
+    private GameObject origin;
+    //[SerializeField]
+    //private GameObject brokenManager;
+    [SerializeField]
+    private Material[] statesMaterials;
+
     //private int[] states = { 0, 1, 2, 3 };
     private int startingState = 0;
     private int currentState = 0;
+    
     private Rigidbody rb;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -14,7 +22,7 @@ public class PieceBehaviour : MonoBehaviour, IDrag
     void Awake()
     {
         //get original position and rotation
-        originalPosition = transform.position;
+        originalPosition = origin.transform.position;
         originalRotation = Quaternion.identity;
         //set state 0
         currentState = startingState;
@@ -34,14 +42,20 @@ public class PieceBehaviour : MonoBehaviour, IDrag
             // idle
             case 0:
                 Debug.Log("state 0 = idle");
+                gameObject.tag = "Draggable";
+                this.GetComponent<MeshRenderer>().material = statesMaterials[0];
                 break;
             // broken
             case 1:
                 Debug.Log("state 1 = broken");
+                gameObject.tag = "Draggable";
                 break;
             // solved
             case 2:
                 Debug.Log("state 2 = solved");
+                gameObject.tag = "Solved";
+                //change material (get from manager)
+                this.GetComponent<MeshRenderer>().material = statesMaterials[1];
                 transform.position = originalPosition;
                 transform.rotation = originalRotation;
 
@@ -65,26 +79,44 @@ public class PieceBehaviour : MonoBehaviour, IDrag
         //disable gravity
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-        //Freeze x and z rotation axis. Reset x z rotation to origin? Make the object parallel to camera plane
         // POLISH use coroutine to make the rotation meanwhile?
-        
+
+        // if idle, become broken
+        if (currentState == 0)
+            currentState = 1;
+
         transform.rotation = originalRotation;
     }
 
     public void onEndDrag()
     {
+        //after broken and not solved, become idle
+        if (currentState == 1)
+            currentState = 0;
         //enable gravity, frozen axis
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.None;
         rb.velocity = Vector3.zero;
-        //check collision, if = original position, state becomes solved
     }
 
-
-    private void OnTriggerStay(Collider other)
+ /*   if stays on the ground, don't let it move?
+    void OnCollisionEnter(Collision other)
     {
-        //if state1 and stays on the original position if ((tag == puzzleposition) && (currentposition == originalposition O ALGO ASI))  with a low velocity, changes to state2 solved
-        //if changed to state solved(2), play a soft glass sound (wine glass tapped), send notification to ♥
+        if (other.collider.CompareTag("Floor"))
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }*/
+
+    void OnTriggerStay(Collider other)
+    {
+        
+        //if changed to state solved(2), play a soft glass sound (wine glass tapped), send notification to coramanager
         //if all pieces are solved, go for state all_solved (3)
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //make it draggable only if it's the piece on top of everything else
     }
 }

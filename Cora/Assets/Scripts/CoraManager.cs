@@ -9,13 +9,17 @@ public class CoraManager : MonoBehaviour
     private InputManager inputManager;
     private Camera cameraMain;
 
+    [SerializeField]
+    private Material[] material;
+
     public GameObject fullHeart;
     public GameObject[] brokenHearts;
 
     public GameObject currentHeart;
 
-    //public List<int> brokenHeartsIndex;
     private int brokenHeartsIndex = 0;
+    private int brokenHeartsTotal;
+    private int solvedHearts = 0;
 
 
     private void Awake()
@@ -25,22 +29,34 @@ public class CoraManager : MonoBehaviour
         cameraMain = Camera.main;
         currentHeart = fullHeart;
 
-        //int[] brokenHeartsIndex = new int[brokenHearts.Length];
-        //for (int i = 0; i < brokenHearts.Length; i++)
-        //{
-        //    brokenHeartsIndex.Add(i);
-        //}
+        brokenHeartsTotal = brokenHearts.Length;
     }
 
-/*    private void Start()
-    {
-        for (int i = 0; i < brokenHearts.Length; i++)
-        {
-            brokenHeartsIndex[i] = i;
-        }
-    }*/
 
-    private void OnEnable()
+    void Update()
+    {
+        
+        //Full heart, wait and change
+        if (currentHeart == fullHeart)
+        {
+            StartCoroutine(WaitCoroutineBreak(2f));
+            //BreakHeart();
+        }
+
+        //Restore heart and swap the next broken heart
+        if ((currentHeart != fullHeart) && (brokenHeartsIndex < brokenHeartsTotal))
+        {
+            if (currentHeart.GetComponent<BrokenManager>().CurrentState == 1)
+            RestoreHeart();
+        }
+
+ /*       else if ((currentHeart != fullHeart) && (brokenHeartsIndex == brokenHeartsTotal))
+        {
+            LastHeart();
+        }*/
+    }
+
+/*    private void OnEnable()
     {
         inputManager.OnStartTouch += Move;
     }
@@ -48,7 +64,7 @@ public class CoraManager : MonoBehaviour
     {
         inputManager.OnEndTouch -= Move;
     }
-
+*/
 /*    private void Change(Vector2 screenPosition, float time)
     {
         //if (fullHeart.activeSelf == true)
@@ -71,7 +87,7 @@ public class CoraManager : MonoBehaviour
         }
     }*/
 
-    public void Move(Vector2 screenPosition, float time)
+/*    public void Move(Vector2 screenPosition, float time)
     {
         // Use this to Move dropped fragments to focus plane
         // Check this when the movement happens
@@ -95,7 +111,7 @@ public class CoraManager : MonoBehaviour
             LastHeart();
         }
         //transform.position = worldCoordinates;
-    }
+    }*/
 
     public void BreakHeart()
     {
@@ -105,7 +121,8 @@ public class CoraManager : MonoBehaviour
 
         Debug.Log("brokenHeart index is " + brokenHeartsIndex);
 
-        brokenHeartsIndex++;
+        //Something is WRONG here
+        //brokenHeartsIndex++;
     }
 
     public void RestoreHeart()
@@ -115,12 +132,22 @@ public class CoraManager : MonoBehaviour
         currentHeart.SetActive(true);
 
         Debug.Log("fullHeart");
-        //♥
     }
 
     public void LastHeart()
     {
         Debug.Log("lastHeart, unsolvable");
-        //💔
+    }
+
+    IEnumerator WaitCoroutineBreak(float seconds)
+    {
+        //Print the time of when the function is first called.
+        //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(seconds);
+        BreakHeart();
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
     }
 }

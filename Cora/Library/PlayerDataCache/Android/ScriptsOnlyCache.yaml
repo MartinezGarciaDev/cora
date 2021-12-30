@@ -1,12 +1,18 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BrokenManager
     - CoraManager
     - DragAndDrop
+    - DragAndDropTouch
     - InputManager
+    - PieceBehaviour
+    - PieceOriginCheck
     - TouchTest
     Unity.InputSystem.dll:
     - UnityEngine.InputSystem.Editor.InputActionEditorWindow
+    - UnityEngine.InputSystem.Editor.InputDebuggerWindow
+    - UnityEngine.InputSystem.EnhancedTouch.TouchSimulation
     - UnityEngine.InputSystem.InputActionAsset
     - UnityEngine.InputSystem.InputSettings
     - UnityEngine.InputSystem.InputSystemObject
@@ -63,27 +69,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1974}
+      Script: {instanceID: 1722}
     - Class: 114
-      Script: {instanceID: 2096}
+      Script: {instanceID: 1976}
     - Class: 114
-      Script: {instanceID: 2334}
+      Script: {instanceID: 2098}
     - Class: 114
-      Script: {instanceID: 2718}
+      Script: {instanceID: 2336}
     - Class: 114
-      Script: {instanceID: 2924}
+      Script: {instanceID: 2720}
     - Class: 114
-      Script: {instanceID: 3090}
+      Script: {instanceID: 2926}
     - Class: 114
-      Script: {instanceID: 3462}
+      Script: {instanceID: 3092}
     - Class: 114
-      Script: {instanceID: 4540}
+      Script: {instanceID: 3464}
     - Class: 114
-      Script: {instanceID: 4728}
+      Script: {instanceID: 4542}
     - Class: 114
-      Script: {instanceID: 5064}
+      Script: {instanceID: 4730}
     - Class: 114
-      Script: {instanceID: 5370}
+      Script: {instanceID: 4798}
+    - Class: 114
+      Script: {instanceID: 5068}
+    - Class: 114
+      Script: {instanceID: 5362}
+    - Class: 114
+      Script: {instanceID: 5376}
+    - Class: 114
+      Script: {instanceID: 30384}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -129,6 +143,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: c1745bef76ac3cc71d212efdff95a626
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PieceBehaviour
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -191,7 +211,7 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
-      Hash: 78140a31b5e801716cddffdebc603c81
+      Hash: a54e4dab788bcf9577ec4fa92fe8c992
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CoraManager
@@ -659,6 +679,12 @@ ScriptsOnlyBuild:
     className: TCP2_GetVertexWavesPosition
   - hash:
       serializedVersion: 2
+      Hash: 6425802513d0be2b586878efe1e6d5b9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DragAndDropTouch
+  - hash:
+      serializedVersion: 2
       Hash: c1f5356fcd27668ddc25078e27f9828d
     assemblyName: Unity.InputSystem.dll
     namespaceName: UnityEngine.InputSystem.UI
@@ -719,6 +745,12 @@ ScriptsOnlyBuild:
     className: TCP2_CameraDepth
   - hash:
       serializedVersion: 2
+      Hash: 8f89a7ef642211716867ac25022ee822
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PieceOriginCheck
+  - hash:
+      serializedVersion: 2
       Hash: 4967a5e87b7302de83b7ddf0af72af83
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -759,7 +791,13 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: TouchInputModule
+  - hash:
+      serializedVersion: 2
+      Hash: 6836194e0f6598ccef64d3862ca800fd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BrokenManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/TestScene.unity
-  playerPath: "E:/Users/Inpu/cora/Cora/Builds/\u2665_0.0.4.apk"
+  playerPath: "E:/Users/Inpu/cora/Cora/Builds/\u2665_0.0.6.apk"
